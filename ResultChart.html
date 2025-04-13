@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Results Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        #chart-container {
+            width: 90%;
+            margin: 20px auto;
+        }
+        table {
+            margin-top: 20px;
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        table, th, td {
+            border: 1px solid #7fb4dd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #cfebeefd;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Chart Container -->
+<div id="chart-container">
+    <canvas id="testResultsChart"></canvas>
+</div>
+
+<!-- Results Table -->
+<table id="resultsTable">
+    <thead>
+    <tr>
+        <th>Device</th>
+        <th>Pass (%)</th>
+        <th>Fail (%)</th>
+        <th>Skip (%)</th>
+    </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+    // Fetch data from the JSON file
+     fetch('./TestResult.json').then(response => {
+                if (!response.ok) {
+                    throw new Error("Không thể đọc file JSON");
+                }
+                return response.json();
+         })
+        .then(devices => {
+            // Once data is fetched, create the chart and table
+            createResultsTable(devices);
+            createChart(devices);
+        })
+        .catch(error => console.error('Error loading the JSON file:', error));
+
+    // Function to create table dynamically
+    function createResultsTable(devices) {
+        const tableBody = document.querySelector('#resultsTable tbody');
+        tableBody.innerHTML = ''; // Clear existing rows
+
+        devices.forEach(device => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${device.deviceName}</td>
+                <td>${Math.round(device.pass/(device.pass + device.fail + device.skip) * 100)}</td>
+                <td>${Math.round(device.fail/(device.pass + device.fail + device.skip) * 100)}</td>
+                <td>${Math.round(device.skip/(device.pass + device.fail + device.skip) * 100)}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    }
+    // Function to create chart dynamically
+    function createChart(devices) {
+        const labels = [];
+        const passData = [];
+        const failData = [];
+        const skipData = [];
+
+        devices.forEach(device => {
+            labels.push(device.deviceName);
+            passData.push(device.pass);
+            failData.push(device.fail);
+            skipData.push(device.skip);
+        });
+
+        const ctx = document.getElementById('testResultsChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Pass',
+                        data: passData,
+                        backgroundColor: 'rgba(60,190,0,1)',
+                    },
+                    {
+                        label: 'Fail',
+                        data: failData,
+                        backgroundColor: 'red',
+                    },
+                    {
+                        label: 'Skip',
+                        data: skipData,
+                        backgroundColor: 'rgba(255,180,0,1)',
+                    },
+                ]
+            },
+            options: {
+                  responsive: true,
+                  scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Status',
+                                font: {
+                                    size: 15,
+                                    weight: 'bold',
+                                },
+                                beginAtZero: true
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Number Cases',
+                                font: {
+                                    size: 15,
+                                    weight: 'bold',
+                                },
+                            },
+                            beginAtZero: true
+                        }
+                  },
+                  plugins: {
+                  title: {
+                        display: true,
+                        text: 'Summary results for each device', // Chart title
+                        color: 'black',
+                        font: {
+                            weight: 'bold',
+                            size: 20
+                        }
+                    },
+                    legend: {
+                      labels: {
+                             font: {
+                                 size: 12,
+                                 weight: 'bold'
+                             },
+                           color: 'black'
+                        }
+                    }
+                }
+            }
+        });
+    }
+</script>
+</body>
+</html>

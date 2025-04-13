@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="OnLive Tv Android">
+    <parameter name="platform" value="android device"></parameter>
+    <listeners>
+        <listener class-name="myListener.MyListener"></listener>
+        <listener class-name="myListener.SuiteListener"></listener>
+    </listeners>
+    <test name="LiveSource Test">
+        <classes>
+            <class name="runners.MatchScheduleRunner" ></class>
+        </classes>
+    </test>
+</suite>
