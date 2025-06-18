@@ -1,0 +1,7 @@
+{
+   "name": "GitLab",
+   "type": "gitlab",
+   "buildOrder": 1,
+   "buildName": "Onlive Tv",
+   "reportName": "Report: Test Automation with Selenium Java Cucumber"
+}

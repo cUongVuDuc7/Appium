@@ -38,3 +38,6 @@ curl -u "YOUR_USERNAME:YOUR_ACCESS_KEY" \
    mvn test -PloginTest
 3. Khi run browser stack với username, pass, id :
    mvn test -DuserName=cuongvu_FerjhE -DaccessKey=idKAyrfQhD8DzT2su7Xe -DappId=bs://8223a66b66c48e4e42c5fc779252d85a829d1bdd
+
+** **
+1. debug js để view page:  setTimeout(() => {debugger}, 2000)
