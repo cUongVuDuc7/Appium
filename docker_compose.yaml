@@ -1,0 +1,16 @@
+version : "3"
+service:
+  demoAuto:
+    image: #name image
+    container_name: #name container
+    entrypoint: # cmd
+    depends_on:
+      # any other service
+    working_dir: /app
+    environment:
+      # path, key,
+    port:
+      80:80
+    volumes:
+      #/host_path:/app
+
