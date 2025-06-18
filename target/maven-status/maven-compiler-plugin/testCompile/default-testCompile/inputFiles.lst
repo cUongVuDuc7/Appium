@@ -1,0 +1,10 @@
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/base/BasePage.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/base/BaseRunner.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/hooks/Hooks.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/pages/HomePage.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/pages/LoginPage.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/runners/ForgotPasswordRunner.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/runners/LoginRunner.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/stepDefinitions/ForgotPasswordSteps.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/stepDefinitions/HomeSteps.java
+/Users/cuongvu/AutomationTest/automation-onlivetv-android/src/test/java/stepDefinitions/LoginSteps.java
